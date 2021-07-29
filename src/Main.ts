@@ -33,6 +33,8 @@ class Main extends eui.UILayer {
 
     private dispatcher: CustomDispatcher = new CustomDispatcher()
 
+    private store:Store = new Store()
+
     protected createChildren(): void {
         super.createChildren();
 
@@ -103,17 +105,20 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-
+        
         let bg = new Bg(this.dispatcher)
         this.addChild(bg)
 
-        let btn = new Btn(this.dispatcher)
-        btn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
-            this.dispatcher.startGame() // 触发开始游戏
-        }, this)
-
-
+        let btn = new Btn(this.dispatcher,this.store)
         this.addChild(btn)
+
+        let hero = new Body(this.dispatcher,this.store)
+        this.addChild(hero)
+
+        let enemy = new Enemy(this.dispatcher,this.store)
+        this.addChild(enemy)
+
+        
 
         /*
         这里不用 egret.startTick 是因为其是60帧的画面 页面会很抖效果不好

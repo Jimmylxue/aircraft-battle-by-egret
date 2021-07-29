@@ -15,7 +15,8 @@ class Bg extends egret.Sprite {
     this.dispatcher = dispatcher
     if (dispatcher) {
       this.dispatcher.addEventListener(CustomDispatcher.START, this.startGame, this)
-      // this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
+      this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
+      this.dispatcher.addEventListener(CustomDispatcher.CONTINUE, this.continueGame, this)
     }
     this.initBg()
   }
@@ -36,11 +37,6 @@ class Bg extends egret.Sprite {
     }, this)
   }
 
-
-  public startGame(): void {
-    this.startTimer.start()
-  }
-
   private moveBg(obj: egret.Bitmap[], speed): void {
     obj.forEach((item, index) => {
       item.y += this.speed_bg
@@ -49,4 +45,18 @@ class Bg extends egret.Sprite {
       }
     })
   }
+
+  private startGame(): void {
+    this.startTimer.start()
+  }
+
+  private stopGame():void{
+    this.startTimer.stop()
+  }
+
+  private continueGame():void{
+    this.startTimer.start()
+  }
+
+  
 }

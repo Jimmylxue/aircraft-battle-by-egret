@@ -1,8 +1,9 @@
 class CustomDispatcher extends egret.EventDispatcher {
 
   public static OVER: string = "gameover";
-  public static CLICK: string = "click";
+  public static STOP: string = "gamestop";
   public static START: string = "gamestart";
+  public static CONTINUE: string = "continue";
 
   constructor() {
     super()
@@ -16,7 +17,11 @@ class CustomDispatcher extends egret.EventDispatcher {
     this.dispatchEventWith(CustomDispatcher.START);
   }
 
-  public birdLeap(): void {
-    this.dispatchEventWith(CustomDispatcher.CLICK);
+  public gameStop(): void {
+    this.dispatchEventWith(CustomDispatcher.STOP);
+  }
+
+  public gamecontinue(): void {
+    this.dispatchEventWith(CustomDispatcher.CONTINUE);
   }
 }
