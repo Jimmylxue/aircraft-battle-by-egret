@@ -4,6 +4,8 @@ class CustomDispatcher extends egret.EventDispatcher {
   public static STOP: string = "gamestop";
   public static START: string = "gamestart";
   public static CONTINUE: string = "continue";
+  public static BLOOD: string = "blood"; // 流血
+  public static RESTAR: string = "restar"; // 流血
 
   constructor() {
     super()
@@ -23,5 +25,13 @@ class CustomDispatcher extends egret.EventDispatcher {
 
   public gamecontinue(): void {
     this.dispatchEventWith(CustomDispatcher.CONTINUE);
+  }
+
+  public buckleBliid(): void {
+    this.dispatchEventWith(CustomDispatcher.BLOOD);
+  }
+
+  public restar(): void {
+    this.dispatchEventWith(CustomDispatcher.RESTAR);
   }
 }

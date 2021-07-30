@@ -35,6 +35,8 @@ class Main extends eui.UILayer {
 
     private store:Store = new Store()
 
+    private myPannel:eui.Panel
+
     protected createChildren(): void {
         super.createChildren();
 
@@ -75,9 +77,10 @@ class Main extends eui.UILayer {
 
     private async loadResource() {
         try {
+            await RES.loadConfig("resource/default.res.json", "resource/");
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
-            await RES.loadConfig("resource/default.res.json", "resource/");
+            
             await this.loadTheme();
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
@@ -105,7 +108,9 @@ class Main extends eui.UILayer {
      * Create scene interface
      */
     protected createGameScene(): void {
-        
+        this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
+        let sound:egret.Sound = RES.getRes("bgm_mp3");
+        // sound.play()        
         let bg = new Bg(this.dispatcher)
         this.addChild(bg)
 
@@ -117,14 +122,32 @@ class Main extends eui.UILayer {
 
         let enemy = new Enemy(this.dispatcher,this.store)
         this.addChild(enemy)
-
+        
         
 
-        /*
-        这里不用 egret.startTick 是因为其是60帧的画面 页面会很抖效果不好
-       */
 
+    }
 
+    private gameOver():void{
+        this.myPannel = new eui.Panel();
+        this.myPannel.zIndex = 99
+        this.myPannel.title = "游戏结束";
+        let endText = new egret.TextField()
+        endText.text = `游戏结束\n您的成绩是${this.store.getScore()}`
+        this.myPannel.addChild(endText)
+        this.myPannel.minWidth = 450
+        endText.anchorOffsetX = endText.width/2
+        endText.anchorOffsetY = endText.height/2
+        endText.x = this.myPannel.width/2+10
+        endText.y = this.myPannel.height/2+110
+        endText.size = 25
+        endText.textColor = 0x000000
+        endText.textAlign = "center"
+        this.myPannel.y = egret.MainContext.instance.stage.stageHeight/2 - 150
+        this.myPannel.x = egret.MainContext.instance.stage.stageWidth/2 - this.myPannel.width/2
+        this.addChild(this.myPannel)
+        this.myPannel.closeButton.label = '重新开始'
+        this.myPannel.closeButton.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onButtonClick,this)
     }
 
     /**
@@ -162,10 +185,6 @@ class Main extends eui.UILayer {
      * Click the button
      */
     private onButtonClick(e: egret.TouchEvent) {
-        let panel = new eui.Panel();
-        panel.title = "Title";
-        panel.horizontalCenter = 0;
-        panel.verticalCenter = 0;
-        this.addChild(panel);
+        this.dispatcher.restar()
     }
 }

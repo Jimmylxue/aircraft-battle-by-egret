@@ -17,6 +17,8 @@ class Bg extends egret.Sprite {
       this.dispatcher.addEventListener(CustomDispatcher.START, this.startGame, this)
       this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
       this.dispatcher.addEventListener(CustomDispatcher.CONTINUE, this.continueGame, this)
+      this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
+      this.dispatcher.addEventListener(CustomDispatcher.RESTAR, this.restat, this)
     }
     this.initBg()
   }
@@ -58,5 +60,13 @@ class Bg extends egret.Sprite {
     this.startTimer.start()
   }
 
-  
+  private gameOver():void{
+    this.startTimer.stop()
+  }
+
+  private restat():void{
+    this.startTimer.reset()
+    this.startTimer.start()
+    // this.removeChildren()
+  }
 }
