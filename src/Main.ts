@@ -115,18 +115,6 @@ class Main extends eui.UILayer {
 		this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
-
-		// setTimeout(() => {
-		// 	console.log('xxxxxxxxxxxxxxxxxx')
-		// 	channel.stop()
-		// 	channel.position = 0
-		// }, 3000)
-
-		// setTimeout(() => {
-		// 	// sound.close()
-		// 	channel.stop()
-		// 	console.log('laileaaaaaaaaaaa')
-		// }, 3000)
 		this.store.setBgm(sound)
 		this.store.toggleBgm(1)
 
@@ -150,32 +138,6 @@ class Main extends eui.UILayer {
 		let tw = egret.Tween.get(this.star.startBtn, { loop: true })
 		this.startAnimation(tw)
 		this.star.addEventListener(egret.TouchEvent.TOUCH_TAP, this.starGame, this)
-
-		// this.setting = new Setting()
-
-		// // this.setting.x =
-		// // 	egret.MainContext.instance.stage.stageWidth - this.setting.width
-		// // this.setting.y =
-		// // 	egret.MainContext.instance.stage.stageHeight - this.setting.width
-
-		// this.setting.width = 500
-		// this.setting.height = 365
-		// this.setting.x =
-		// 	egret.MainContext.instance.stage.stageWidth / 2 - this.setting.width / 2
-		// this.setting.y =
-		// 	egret.MainContext.instance.stage.stageHeight / 2 - this.setting.height / 2
-		// this.addChild(this.setting)
-		// this.setting.visible = true
-		// this.setting.startBtn.addEventListener(
-		// 	egret.TouchEvent.TOUCH_TAP,
-		// 	() => {
-		// 		console.log('xxxx')
-		// 		// this.dispatcher.gamecontinue()
-		// 	},
-		// 	this
-		// )
-		// console.log('closeBtn', this.setting.startBtn)
-		// this.setting.startB
 	}
 
 	private startAnimation(tw): void {
@@ -273,33 +235,6 @@ class Main extends eui.UILayer {
 			this
 		)
 	}
-
-	/**
-	 * 描述文件加载成功，开始播放动画
-	 * Description file loading is successful, start to play the animation
-	 */
-	// private startAnimation(result: Array<any>): void {
-	// 	// let parser = new egret.HtmlTextParser();
-	// 	// let textflowArr = result.map(text => parser.parse(text));
-	// 	// let textfield = this.textfield;
-	// 	// let count = -1;
-	// 	// let change = () => {
-	// 	//     count++;
-	// 	//     if (count >= textflowArr.length) {
-	// 	//         count = 0;
-	// 	//     }
-	// 	//     let textFlow = textflowArr[count];
-	// 	//     // 切换描述内容
-	// 	//     // Switch to described content
-	// 	//     textfield.textFlow = textFlow;
-	// 	//     let tw = egret.Tween.get(textfield);
-	// 	//     tw.to({ "alpha": 1 }, 200);
-	// 	//     tw.wait(2000);
-	// 	//     tw.to({ "alpha": 0 }, 200);
-	// 	//     tw.call(change, this);
-	// 	// };
-	// 	// change();
-	// }
 
 	/**
 	 * 点击按钮
