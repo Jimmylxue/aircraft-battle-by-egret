@@ -5,7 +5,8 @@ class Fnc {
 		result.texture = texture
 		return result
 	}
-	
+
+	// 扣血
 	public blood(ref:egret.Bitmap,that,type?:string){
 		// 扣血动画 虽然和爆炸的操作是一样的 但是后期可能会换不同的图片 音频等 所以不封装在一起写 而拆成两个方法
 		let img:egret.Bitmap = this.createBitmapByName('explosion1_png')
@@ -32,6 +33,7 @@ class Fnc {
 		imgTimer.start()
 	}
 
+	// 爆炸
 	public blast(ref:egret.Bitmap,that,type?:string){
 		// 爆炸显示公共方法
 		let img:egret.Bitmap = this.createBitmapByName('explosion1_png')
