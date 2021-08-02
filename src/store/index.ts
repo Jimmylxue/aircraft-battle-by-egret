@@ -69,6 +69,10 @@ class Store {
 		this.score++
 	}
 
+	public clearScore(){
+		this.score = 0
+	}
+
 	public setBgm(demo: egret.Sound) {
 		this.bgm = demo
 		// this.channel = this.bgm.play()

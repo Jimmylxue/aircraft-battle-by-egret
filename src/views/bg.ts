@@ -24,8 +24,12 @@ class Bg extends egret.Sprite {
   }
 
   private initBg(): void {
+    let str = Math.floor(Math.random()*2) === 1?'bg2_jpg':'bg_jpg';
+    
     for (let i = 0; i < 2; i++) {
-      this.sky[i] = this.fnc.createBitmapByName("bg_jpg");
+      
+      
+      this.sky[i] = this.fnc.createBitmapByName(`${str}`);
       this.sky[i].width = egret.MainContext.instance.stage.stageWidth;
       this.sky[i].height = egret.MainContext.instance.stage.stageHeight;
     }

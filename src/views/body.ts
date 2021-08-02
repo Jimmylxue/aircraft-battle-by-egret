@@ -41,13 +41,22 @@ class Body extends egret.Sprite {
 	}
 
 	private initHero() {
+		// if(this.hero){
+		// 	console.log('有飞机了')
+		// 	this.removeChild(this.hero)
+		// }
 		this.hero = this.fnc.createBitmapByName('hero_png')
 		this.hero.width = 150
 		this.hero.height = 100
 		this.hero.x = egret.MainContext.instance.stage.stageWidth / 2
 		this.hero.y =
 			egret.MainContext.instance.stage.stageHeight + this.hero.height / 2
-		this.addChild(this.hero)
+
+			this.addChild(this.hero)
+		
+		// if(!this.hero){
+		// 	this.addChild(this.hero)
+		// }
 		this.hero.touchEnabled = true
 		// 这两行非常的重要，等于将这个元素的锚点设置到这个元素的正中心
 		this.hero.anchorOffsetX = this.hero.width / 2
@@ -79,12 +88,21 @@ class Body extends egret.Sprite {
 	private continueGame(): void {}
 
 	private gameOver(): void {
-		this.removeChild(this.hero)
+		console.log('主机 -- 销毁主机')
 		this.fnc.blast(this.hero, this, 'hero')
+		this.removeChild(this.hero)
+		this.store.clearScore() // 清空得分数据
+		// this.removeChildren()
+		
 	}
 
 	private restar(): void {
-		this.initHero()
+		console.log('重新开始 -- 创建战机')
+		// this.initHero()  卡了很久 清除掉其实没有必要重新创建再加入 这样会造成实际上有很多个主机
+		this.hero.x = egret.MainContext.instance.stage.stageWidth / 2
+		this.hero.y =
+			egret.MainContext.instance.stage.stageHeight + this.hero.height / 2
+		this.addChild(this.hero)
 		this.startGame()
 	}
 }

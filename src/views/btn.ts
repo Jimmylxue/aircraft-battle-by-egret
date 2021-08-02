@@ -59,21 +59,21 @@ class Btn extends egret.Sprite {
 	}
 
 	private init(): void {
-		this.go = this.fnc.createBitmapByName('go_png')
-		this.go.width = 60
-		this.go.height = 60
-		this.go.x = egret.MainContext.instance.stage.stageWidth - this.go.width - 10
-		this.go.y = 10
-		this.go.visible = false
-		this.addChild(this.go)
-		this.go.touchEnabled = true
-		this.go.addEventListener(
-			egret.TouchEvent.TOUCH_TAP,
-			() => {
-				this.dispatcher.gamecontinue()
-			},
-			this
-		)
+		// this.go = this.fnc.createBitmapByName('go_png')
+		// this.go.width = 60
+		// this.go.height = 60
+		// this.go.x = egret.MainContext.instance.stage.stageWidth - this.go.width - 10
+		// this.go.y = 10
+		// this.go.visible = false
+		// this.addChild(this.go)
+		// this.go.touchEnabled = true
+		// this.go.addEventListener(
+		// 	egret.TouchEvent.TOUCH_TAP,
+		// 	() => {
+		// 		this.dispatcher.gamecontinue()
+		// 	},
+		// 	this
+		// )
 
 		this.stop = this.fnc.createBitmapByName('stop_png')
 		this.stop.width = 60
@@ -97,7 +97,6 @@ class Btn extends egret.Sprite {
 	}
 
 	private initLift(): void {
-		console.log('xxxxaaaa')
 		for (let i = 0; i < this.nowLift; i++) {
 			let lift = this.fnc.createBitmapByName('life_png')
 			lift.width = 40
@@ -121,7 +120,7 @@ class Btn extends egret.Sprite {
 		// 暂停游戏
 		//  console.log('laile',this.stop,this.go)
 		this.stop.visible = false
-		this.go.visible = true
+		// this.go.visible = true
 		// this.dispatcher.gameStop()
 		this.store.stop()
 	}
@@ -129,7 +128,7 @@ class Btn extends egret.Sprite {
 	private continueGame(): void {
 		// 继续游戏
 		this.stop.visible = true
-		this.go.visible = false
+		// this.go.visible = false
 		this.store.start()
 		this.dispatcher.startGame()
 	}
@@ -138,6 +137,7 @@ class Btn extends egret.Sprite {
 		// 扣血
 		this.nowLift--
 		if (this.nowLift === 0) {
+			console.log('触发游戏结束')
 			this.dispatcher.gameOver()
 			this.store.over()
 		}

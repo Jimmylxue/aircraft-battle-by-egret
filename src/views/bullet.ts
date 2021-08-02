@@ -14,6 +14,7 @@ class Bullet extends egret.Sprite {
 
 	constructor(dispatcher: CustomDispatcher, store: Store, hero: egret.Bitmap) {
 		super()
+		console.log('创建子弹')
 		this.dispatcher = dispatcher
 		this.store = store
 		this.hero = hero
@@ -53,7 +54,6 @@ class Bullet extends egret.Sprite {
 		this.timer_launch.addEventListener(
 			egret.TimerEvent.TIMER,
 			() => {
-				console.log('qqq')
 				if (this.store.status === Store.STOP) {
 					this.timer_launch.stop()
 					return
@@ -81,7 +81,6 @@ class Bullet extends egret.Sprite {
 	}
 
 	private moveBullet(bullet: egret.Bitmap): void {
-		console.log('move')
 		// 发射出去 -- 这里可能有个优化点 创建了太多的 timer 了  不知道是不是可以使用 setInterval 来做
 		let timer = new egret.Timer(1)
 		timer.addEventListener(
@@ -113,8 +112,13 @@ class Bullet extends egret.Sprite {
 						setTimeout(() => {
 							channel.stop()
 						}, 500)
-						this.removeChild(bullet)
-						this.store.that.removeChild(enemy.value)
+						if(this.$children.indexOf(bullet)!=-1){
+							console.log('存在2')
+							this.removeChild(bullet)
+							this.store.that.removeChild(enemy.value)
+						}
+						// this.removeChild(bullet)
+						// this.store.that.removeChild(enemy.value)
 						enemy.timer.stop()
 						this.store.outEnemy(enemy)
 						timer.stop()
@@ -122,9 +126,14 @@ class Bullet extends egret.Sprite {
 					}
 				})
 
-				if (bullet.y <= 20) {
+				if (bullet.y <= -120) {
+					// 飞机高度是 100 再另外加 20的安全距离
 					console.log('暂停发射子弹的定时器')
-					this.removeChild(bullet)
+					if(this.$children.indexOf(bullet)!=-1){
+						console.log('存在')
+						this.removeChild(bullet)
+					}
+					// this.removeChild(bullet)
 					timer.stop()
 				}
 			},
@@ -134,7 +143,6 @@ class Bullet extends egret.Sprite {
 	}
 
 	private startGame(): void {
-		console.log('jixu')
 		this.timer_launch.start()
 	}
 
@@ -143,10 +151,12 @@ class Bullet extends egret.Sprite {
 	private continueGame(): void {}
 
 	private gameOver(): void {
+		console.log('游戏结束了')
 		this.timer_launch.stop()
 	}
 
 	private restar(): void {
+		console.log('重新开始了')
 		this.removeChildren()
 		this.store.restar()
 		this.hero = this.store.hero

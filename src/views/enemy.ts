@@ -94,7 +94,6 @@ class Enemy extends egret.Sprite{
   }
 
   private startGame(): void {
-    // console.log('jixu')
     this.timer_enemy.start()
   }
 
