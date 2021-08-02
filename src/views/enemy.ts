@@ -26,6 +26,9 @@ class Enemy extends egret.Sprite{
     }  
     this.boomMusic = RES.getRes("boom_mp3");
     this.initEnemy()
+    // this.timer_enemy.start()
+
+    
   }
 
   private initEnemy():void{
@@ -59,6 +62,49 @@ class Enemy extends egret.Sprite{
       value:enemy
     }
     this.store.addEnemy(obj)
+    console.log('xxx',this.store.enemyList)
+    // this.store.enemyRemove = this.enemyFly.bind(this, enemy);
+    // enemy.addEventListener(egret.Event.ENTER_FRAME,this.enemyFly.bind(this,enemy,1),this)
+    // enemy.addEventListener(egret.Event.ENTER_FRAME,this.store.enemyRemove,this)
+    // enemy.removeEventListener(egret.Event.ENTER_FRAME,this.enemyFly.bind(this,enemy,2),this)
+
+    // setTimeout(() => {
+    //   console.log('到时间了')
+    //   // enemy.removeEventListener(egret.Event.ENTER_FRAME,this.enemyFly.bind(this,enemy),this)
+    //   enemy.removeEventListener(egret.Event.ENTER_FRAME,this.store.enemyRemove,this)
+    // }, 500);
+
+    // enemy.addEventListener(egret.Event.ENTER_FRAME,()=>{
+    //   enemy.y+=this.speed_enemy
+    //   let rect1:egret.Rectangle = enemy.getBounds()
+    //   let rect2:egret.Rectangle = this.store.hero.getBounds()
+    //   rect1.x = enemy.x
+    //   rect1.y = enemy.y
+    //   rect2.x = this.store.hero.x-this.store.hero.width/2
+    //   rect2.y = this.store.hero.y
+    //   if(rect1.intersects(rect2)){
+    //     // 主角战机被撞到 游戏结束
+    //     if(this.store.enemyList.indexOf(obj)!==-1){
+    //       // alert('飞机相撞了')
+    //       console.log('飞机装了')
+    //       this.fnc.blood(enemy,this,'hero')
+    //       let channel = this.boomMusic.play(0,1)
+    //       setTimeout(() => {
+    //         channel.stop()
+    //       }, 500);
+    //       this.dispatcher.buckleBliid()
+    //       this.store.outEnemy(obj)
+    //       this.removeChild(obj.value)
+    //       timer.stop()
+    //     }
+    //   }
+    //   if(enemy.y>=egret.MainContext.instance.stage.stageHeight){
+    //     timer.stop()
+    //     // 这里可优化
+    //     this.store.enemyList.splice(this.store.enemyList.indexOf(obj),1) // 有问题看这里
+    //     console.log('暂停飞机飞行的定时器',this.store.enemyList)
+    //   }
+    // },this)
     timer.addEventListener(egret.TimerEvent.TIMER,()=>{
       enemy.y+=this.speed_enemy
       let rect1:egret.Rectangle = enemy.getBounds()
@@ -82,7 +128,7 @@ class Enemy extends egret.Sprite{
           this.removeChild(obj.value)
           timer.stop()
         }
-    }
+      }
       if(enemy.y>=egret.MainContext.instance.stage.stageHeight){
         timer.stop()
         // 这里可优化
@@ -93,21 +139,57 @@ class Enemy extends egret.Sprite{
     timer.start()
   }
 
+  public enemyFly(enemy){
+    console.log(enemy)
+    // console.log('this',this)
+    // console.log('obj',enemy)
+    enemy.y+=this.speed_enemy
+    let rect1:egret.Rectangle = this.getBounds()
+    let rect2:egret.Rectangle = this.store.hero.getBounds()
+    rect1.x = enemy.x
+    rect1.y = enemy.y
+    rect2.x = this.store.hero.x-this.store.hero.width/2
+    rect2.y = this.store.hero.y
+      // if(rect1.intersects(rect2)){
+      //   // 主角战机被撞到 游戏结束
+      //   if(this.store.enemyList.indexOf(this)!==-1){
+      //     // alert('飞机相撞了')
+      //     console.log('飞机装了')
+      //     this.fnc.blood(enemy,this,'hero')
+      //     let channel = this.boomMusic.play(0,1)
+      //     setTimeout(() => {
+      //       channel.stop()
+      //     }, 500);
+      //     this.dispatcher.buckleBliid()
+      //     this.store.outEnemy(obj)
+      //     this.removeChild(obj.value)
+      //     timer.stop()
+      //   }
+      // }
+      // if(enemy.y>=egret.MainContext.instance.stage.stageHeight){
+      //   timer.stop()
+      //   // 这里可优化
+      //   this.store.enemyList.splice(this.store.enemyList.indexOf(obj),1) // 有问题看这里
+      //   console.log('暂停飞机飞行的定时器',this.store.enemyList)
+      // }
+  }
+
   private startGame(): void {
     this.timer_enemy.start()
   }
 
   private stopGame(): void {
-    this.store.enemyList.forEach(item=>item.timer.stop())
+    // this.store.enemyList.forEach(item=>item.removeEventListener(egret.Event.ENTER_FRAME,this.store.enemyRemove,this))
+    this.store.enemyList.forEach(item=>item.timer.stop(),this)
   }
 
   private continueGame(): void {
-    this.store.enemyList.forEach(item=>item.timer.start())
+    this.store.enemyList.forEach(item=>item.timer.stop(),this)
   }
 
   private gameOver():void{
     this.timer_enemy.stop()
-    this.store.enemyList.forEach(item=>item.timer.stop())
+    this.store.enemyList.forEach(item=>item.timer.stop(),this)
   }
 
   private restar():void{

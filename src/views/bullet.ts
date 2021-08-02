@@ -119,8 +119,11 @@ class Bullet extends egret.Sprite {
 						}
 						// this.removeChild(bullet)
 						// this.store.that.removeChild(enemy.value)
+						// this.store.enemyRemove = this.enemyFly.bind(this, enemy);
+						// enemy.removeEventListener(egret.Event.ENTER_FRAME,this.store.enemyRemove,this)
 						enemy.timer.stop()
 						this.store.outEnemy(enemy)
+						
 						timer.stop()
 						return true
 					}
@@ -133,7 +136,6 @@ class Bullet extends egret.Sprite {
 						console.log('存在')
 						this.removeChild(bullet)
 					}
-					// this.removeChild(bullet)
 					timer.stop()
 				}
 			},

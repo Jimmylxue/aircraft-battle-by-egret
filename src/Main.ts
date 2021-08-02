@@ -112,11 +112,14 @@ class Main extends eui.UILayer {
 	 * Create scene interface
 	 */
 	protected createGameScene(): void {
+
+        // egret.Event.ENTER_FRAME(()=>{},this)
+
 		this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
 		this.store.setBgm(sound)
-		this.store.toggleBgm(1)
+		// this.store.toggleBgm(1)
 
 		// sound.play()
 		let bg = new Bg(this.dispatcher)

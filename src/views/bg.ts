@@ -6,7 +6,7 @@ class Bg extends egret.Sprite {
 
   private sky: egret.Bitmap[] = []
 
-  private speed_bg: number = 10
+  private speed_bg: number = 5
 
   private startTimer: egret.Timer = new egret.Timer(18)
 
@@ -38,13 +38,15 @@ class Bg extends egret.Sprite {
 
     this.sky[1].y = -egret.MainContext.instance.stage.stageHeight;
 
-    this.startTimer.addEventListener(egret.TimerEvent.TIMER, () => {
-      this.moveBg(this.sky, this.speed_bg)
-    }, this)
+    
+
+    // this.startTimer.addEventListener(egret.TimerEvent.TIMER, () => {
+    //   this.moveBg(this.sky, this.speed_bg)
+    // }, this)
   }
 
-  private moveBg(obj: egret.Bitmap[], speed): void {
-    obj.forEach((item, index) => {
+  private moveBg(): void {
+    this.sky.forEach((item, index) => {
       item.y += this.speed_bg
       if (item.y > item.height - this.speed_bg - 5) {
         item.y = -item.height
@@ -53,11 +55,13 @@ class Bg extends egret.Sprite {
   }
 
   private startGame(): void {
-    this.startTimer.start()
+    // this.startTimer.start()
+    this.addEventListener(egret.Event.ENTER_FRAME,this.moveBg,this)
   }
 
   private stopGame():void{
-    this.startTimer.stop()
+    // this.startTimer.stop()
+    this.removeEventListener(egret.Event.ENTER_FRAME,this.moveBg,this)
   }
 
   private continueGame():void{

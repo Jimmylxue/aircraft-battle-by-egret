@@ -9,7 +9,7 @@ class Store {
 	static STOP: string = 'stop'
 	static OVER: string = 'over'
 
-	public enemyList: EmemyStyle[] = []
+	public enemyList:EmemyStyle[] = []
 
 	public status: string
 
@@ -21,6 +21,8 @@ class Store {
 
 	private bgm: egret.Sound
 	private channel: egret.SoundChannel
+
+	public enemyRemove
 
 	constructor() {
 		this.status = Store.PENDING //
@@ -52,7 +54,7 @@ class Store {
 	}
 
 	// addEnemy(enemy:egret.Bitmap){
-	public addEnemy(enemy: EmemyStyle) {
+	public addEnemy(enemy:EmemyStyle) {
 		this.enemyList.push(enemy)
 	}
 
