@@ -1,0 +1,395 @@
+{
+	"groups": [
+		{
+			"keys": "checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,button_down_png,button_up_png,thumb_pb_png,track_pb_png,track_sb_png,bg_jpg,egret_icon_png,description_json,about_png,bg2_jpg,blast_png,bullet_png,enemy_png,explosion1_png,explosion10_png,explosion11_png,explosion12_png,explosion13_png,explosion14_png,explosion15_png,explosion16_png,explosion17_png,explosion18_png,explosion19_png,explosion2_png,explosion3_png,explosion4_png,explosion5_png,explosion6_png,explosion7_png,explosion8_png,explosion9_png,go_png,hero_png,life_png,off_music_png,on_music_png,start_png,stop_png,textbg_png,user_png,bgm_mp3,boom_mp3,bullet_mp3,setting1_png,setting2_png,setting3_png,setting4_png,keep_png,close_png,more_png,setting12_png,setting22_png,setting32_png,setting42_png,keep2_png,close2_png,more2_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/CheckBox/checkbox_select_disabled.png",
+			"type": "image",
+			"name": "checkbox_select_disabled_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_down.png",
+			"type": "image",
+			"name": "checkbox_select_down_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_select_up.png",
+			"type": "image",
+			"name": "checkbox_select_up_png"
+		},
+		{
+			"url": "assets/CheckBox/checkbox_unselect.png",
+			"type": "image",
+			"name": "checkbox_unselect_png"
+		},
+		{
+			"url": "assets/ItemRenderer/selected.png",
+			"type": "image",
+			"name": "selected_png"
+		},
+		{
+			"url": "assets/Panel/border.png",
+			"type": "image",
+			"name": "border_png"
+		},
+		{
+			"url": "assets/Panel/header.png",
+			"type": "image",
+			"name": "header_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_disabled.png",
+			"type": "image",
+			"name": "radiobutton_select_disabled_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_down.png",
+			"type": "image",
+			"name": "radiobutton_select_down_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_select_up.png",
+			"type": "image",
+			"name": "radiobutton_select_up_png"
+		},
+		{
+			"url": "assets/RadioButton/radiobutton_unselect.png",
+			"type": "image",
+			"name": "radiobutton_unselect_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/Slider/thumb.png",
+			"type": "image",
+			"name": "thumb_png"
+		},
+		{
+			"url": "assets/Slider/track.png",
+			"type": "image",
+			"name": "track_png"
+		},
+		{
+			"url": "assets/Slider/tracklight.png",
+			"type": "image",
+			"name": "tracklight_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/handle.png",
+			"type": "image",
+			"name": "handle_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/off.png",
+			"type": "image",
+			"name": "off_png"
+		},
+		{
+			"url": "assets/ToggleSwitch/on.png",
+			"type": "image",
+			"name": "on_png"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/about.png",
+			"type": "image",
+			"name": "about_png"
+		},
+		{
+			"url": "assets/bg2.jpg",
+			"type": "image",
+			"name": "bg2_jpg"
+		},
+		{
+			"url": "assets/blast.png",
+			"type": "image",
+			"name": "blast_png"
+		},
+		{
+			"url": "assets/bullet.png",
+			"type": "image",
+			"name": "bullet_png"
+		},
+		{
+			"url": "assets/enemy.png",
+			"type": "image",
+			"name": "enemy_png"
+		},
+		{
+			"url": "assets/explosion1.png",
+			"type": "image",
+			"name": "explosion1_png"
+		},
+		{
+			"url": "assets/explosion10.png",
+			"type": "image",
+			"name": "explosion10_png"
+		},
+		{
+			"url": "assets/explosion11.png",
+			"type": "image",
+			"name": "explosion11_png"
+		},
+		{
+			"url": "assets/explosion12.png",
+			"type": "image",
+			"name": "explosion12_png"
+		},
+		{
+			"url": "assets/explosion13.png",
+			"type": "image",
+			"name": "explosion13_png"
+		},
+		{
+			"url": "assets/explosion14.png",
+			"type": "image",
+			"name": "explosion14_png"
+		},
+		{
+			"url": "assets/explosion15.png",
+			"type": "image",
+			"name": "explosion15_png"
+		},
+		{
+			"url": "assets/explosion16.png",
+			"type": "image",
+			"name": "explosion16_png"
+		},
+		{
+			"url": "assets/explosion17.png",
+			"type": "image",
+			"name": "explosion17_png"
+		},
+		{
+			"url": "assets/explosion18.png",
+			"type": "image",
+			"name": "explosion18_png"
+		},
+		{
+			"url": "assets/explosion19.png",
+			"type": "image",
+			"name": "explosion19_png"
+		},
+		{
+			"url": "assets/explosion2.png",
+			"type": "image",
+			"name": "explosion2_png"
+		},
+		{
+			"url": "assets/explosion3.png",
+			"type": "image",
+			"name": "explosion3_png"
+		},
+		{
+			"url": "assets/explosion4.png",
+			"type": "image",
+			"name": "explosion4_png"
+		},
+		{
+			"url": "assets/explosion5.png",
+			"type": "image",
+			"name": "explosion5_png"
+		},
+		{
+			"url": "assets/explosion6.png",
+			"type": "image",
+			"name": "explosion6_png"
+		},
+		{
+			"url": "assets/explosion7.png",
+			"type": "image",
+			"name": "explosion7_png"
+		},
+		{
+			"url": "assets/explosion8.png",
+			"type": "image",
+			"name": "explosion8_png"
+		},
+		{
+			"url": "assets/explosion9.png",
+			"type": "image",
+			"name": "explosion9_png"
+		},
+		{
+			"url": "assets/go.png",
+			"type": "image",
+			"name": "go_png"
+		},
+		{
+			"url": "assets/hero.png",
+			"type": "image",
+			"name": "hero_png"
+		},
+		{
+			"url": "assets/life.png",
+			"type": "image",
+			"name": "life_png"
+		},
+		{
+			"url": "assets/off_music.png",
+			"type": "image",
+			"name": "off_music_png"
+		},
+		{
+			"url": "assets/on_music.png",
+			"type": "image",
+			"name": "on_music_png"
+		},
+		{
+			"url": "assets/start.png",
+			"type": "image",
+			"name": "start_png"
+		},
+		{
+			"url": "assets/stop.png",
+			"type": "image",
+			"name": "stop_png"
+		},
+		{
+			"url": "assets/textbg.png",
+			"type": "image",
+			"name": "textbg_png"
+		},
+		{
+			"url": "assets/user.png",
+			"type": "image",
+			"name": "user_png"
+		},
+		{
+			"url": "assets/title.png",
+			"type": "image",
+			"name": "title_png"
+		},
+		{
+			"url": "assets/audio/bgm.mp3",
+			"type": "sound",
+			"name": "bgm_mp3"
+		},
+		{
+			"url": "assets/audio/boom.mp3",
+			"type": "sound",
+			"name": "boom_mp3"
+		},
+		{
+			"url": "assets/audio/bullet.mp3",
+			"type": "sound",
+			"name": "bullet_mp3"
+		},
+		{
+			"url": "assets/setting1.png",
+			"type": "image",
+			"name": "setting1_png"
+		},
+		{
+			"url": "assets/setting2.png",
+			"type": "image",
+			"name": "setting2_png"
+		},
+		{
+			"url": "assets/setting3.png",
+			"type": "image",
+			"name": "setting3_png"
+		},
+		{
+			"url": "assets/setting4.png",
+			"type": "image",
+			"name": "setting4_png"
+		},
+		{
+			"url": "assets/keep.png",
+			"type": "image",
+			"name": "keep_png"
+		},
+		{
+			"url": "assets/close.png",
+			"type": "image",
+			"name": "close_png"
+		},
+		{
+			"url": "assets/more.png",
+			"type": "image",
+			"name": "more_png"
+		},
+		{
+			"name": "setting12_png",
+			"type": "image",
+			"url": "assets/setting1.png"
+		},
+		{
+			"name": "setting22_png",
+			"type": "image",
+			"url": "assets/setting2.png"
+		},
+		{
+			"name": "setting32_png",
+			"type": "image",
+			"url": "assets/setting3.png"
+		},
+		{
+			"name": "setting42_png",
+			"type": "image",
+			"url": "assets/setting4.png"
+		},
+		{
+			"name": "keep2_png",
+			"type": "image",
+			"url": "assets/keep.png"
+		},
+		{
+			"name": "close2_png",
+			"type": "image",
+			"url": "assets/close.png"
+		},
+		{
+			"name": "more2_png",
+			"type": "image",
+			"url": "assets/more.png"
+		}
+	]
+}
