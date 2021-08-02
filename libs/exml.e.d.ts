@@ -34,6 +34,10 @@ declare module skins{
 	class ScrollerSkin extends eui.Skin{
 	}
 }
+declare class SettingSkin extends eui.Skin{
+}
+declare class StarSkin extends eui.Skin{
+}
 declare module skins{
 	class TextInputSkin extends eui.Skin{
 	}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="SettingSkin" width="497.706" height="366.155" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="17b01283080" ></w:Config>
+	<e:Image source="user_png" x="19.755" y="83.36" width="132.642" height="206.843"/>
+	<e:Image source="setting4_png" x="171.626" y="71.023" width="285.697" height="243.936"/>
+	<e:Image id="music_close" source="off_music_png" x="224.959" y="102.391" width="182.019" height="44.467" visible="true"/>
+	<e:Image id="music_open" source="on_music_png" x="226.55" y="104.444" width="180" height="45" visible="true"/>
+	<e:Image id="startBtn" source="keep_png" x="227.048" y="173.817" width="178" height="45"/>
+	<e:Image source="more_png" x="253.888" y="260.835" width="124.431" height="35.947"/>
+	<e:Image id="close_btn" source="close_png" x="422.901" y="13.053"/>
+</e:Skin>

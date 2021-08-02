@@ -27,5 +27,10 @@
     {
       "name": "promise"
     }
-  ]
+  ],
+  "eui": {
+    "exmlRoot": [
+      "resource/eui_skins"
+    ]
+  }
 }
