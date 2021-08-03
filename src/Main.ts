@@ -40,6 +40,8 @@ class Main extends eui.UILayer {
 
 	private setting: Setting
 
+	
+
 	protected createChildren(): void {
 		super.createChildren()
 
@@ -119,9 +121,6 @@ class Main extends eui.UILayer {
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
 		this.store.setBgm(sound)
-		// this.store.toggleBgm(1)
-
-		// sound.play()
 		let bg = new Bg(this.dispatcher)
 		this.addChild(bg)
 
@@ -131,10 +130,9 @@ class Main extends eui.UILayer {
 		let hero = new Body(this.dispatcher, this.store)
 		this.addChild(hero)
 
-		let enemy = new Enemy(this.dispatcher, this.store)
+		let enemy = new Enemy(this.store)
 		this.addChild(enemy)
 
-		// console.log('aaaaaaaaaaa')
 		this.star = new Star()
 		// 细节：一定要先加入到舞台之后才可以访问它的一些内部元素
 		this.addChild(this.star)
@@ -211,6 +209,8 @@ class Main extends eui.UILayer {
 			this
 		)
 	}
+
+	public show(){}
 
 	private gameOver(): void {
 		this.myPannel = new eui.Panel()

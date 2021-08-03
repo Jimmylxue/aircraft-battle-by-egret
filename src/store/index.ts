@@ -9,11 +9,16 @@ class Store {
 	static STOP: string = 'stop'
 	static OVER: string = 'over'
 
-	public enemyList:EmemyStyle[] = []
+	public timer_launch:egret.Timer = new egret.Timer(500)
+	public timer_enemy:egret.Timer = new egret.Timer(1000)
+
+	public enemyList:egret.Bitmap[] = []
+	public bulletList:egret.Bitmap[] = []
 
 	public status: string
 
 	public that = null // 存放 创建敌机的 this  因为只有创建敌机的 this 可以调用 removeChild 方法
+	public that_bullet = null // 存放 创建敌机的 this  因为只有创建敌机的 this 可以调用 removeChild 方法
 
 	public hero: egret.Bitmap
 
@@ -26,7 +31,6 @@ class Store {
 
 	constructor() {
 		this.status = Store.PENDING //
-		// this.bgm.play()
 	}
 
 	public start(): void {
@@ -53,14 +57,20 @@ class Store {
 		}
 	}
 
-	// addEnemy(enemy:egret.Bitmap){
-	public addEnemy(enemy:EmemyStyle) {
+	public addEnemy(enemy:egret.Bitmap) {
 		this.enemyList.push(enemy)
 	}
 
-	// outEnemy(enemy:egret.Bitmap){
-	public outEnemy(enemy: EmemyStyle) {
+	public addBullet(bullet:egret.Bitmap) {
+		this.bulletList.push(bullet)
+	}
+
+	public outEnemy(enemy: egret.Bitmap) {
 		this.enemyList.splice(this.enemyList.indexOf(enemy), 1)
+	}
+
+	public outBullet(bullet:egret.Bitmap){
+		this.bulletList.splice(this.bulletList.indexOf(bullet), 1)
 	}
 
 	public getScore(): number {
@@ -77,7 +87,6 @@ class Store {
 
 	public setBgm(demo: egret.Sound) {
 		this.bgm = demo
-		// this.channel = this.bgm.play()
 	}
 
 	public toggleBgm(flag: number) {

@@ -8,27 +8,19 @@ class Bg extends egret.Sprite {
 
   private speed_bg: number = 5
 
-  private startTimer: egret.Timer = new egret.Timer(18)
-
   constructor(dispatcher: CustomDispatcher) {
     super()
     this.dispatcher = dispatcher
     if (dispatcher) {
       this.dispatcher.addEventListener(CustomDispatcher.START, this.startGame, this)
       this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
-      this.dispatcher.addEventListener(CustomDispatcher.CONTINUE, this.continueGame, this)
-      this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
-      this.dispatcher.addEventListener(CustomDispatcher.RESTAR, this.restat, this)
     }
     this.initBg()
   }
 
   private initBg(): void {
     let str = Math.floor(Math.random()*2) === 1?'bg2_jpg':'bg_jpg';
-    
     for (let i = 0; i < 2; i++) {
-      
-      
       this.sky[i] = this.fnc.createBitmapByName(`${str}`);
       this.sky[i].width = egret.MainContext.instance.stage.stageWidth;
       this.sky[i].height = egret.MainContext.instance.stage.stageHeight;
@@ -37,12 +29,6 @@ class Bg extends egret.Sprite {
     this.addChild(this.sky[1])
 
     this.sky[1].y = -egret.MainContext.instance.stage.stageHeight;
-
-    
-
-    // this.startTimer.addEventListener(egret.TimerEvent.TIMER, () => {
-    //   this.moveBg(this.sky, this.speed_bg)
-    // }, this)
   }
 
   private moveBg(): void {
@@ -55,26 +41,10 @@ class Bg extends egret.Sprite {
   }
 
   private startGame(): void {
-    // this.startTimer.start()
     this.addEventListener(egret.Event.ENTER_FRAME,this.moveBg,this)
   }
 
   private stopGame():void{
-    // this.startTimer.stop()
     this.removeEventListener(egret.Event.ENTER_FRAME,this.moveBg,this)
-  }
-
-  private continueGame():void{
-    this.startTimer.start()
-  }
-
-  private gameOver():void{
-    this.startTimer.stop()
-  }
-
-  private restat():void{
-    this.startTimer.reset()
-    this.startTimer.start()
-    // this.removeChildren()
   }
 }

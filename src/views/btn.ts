@@ -3,18 +3,11 @@ class Btn extends egret.Sprite {
 	private dispatcher: CustomDispatcher
 	private store: Store
 	private fnc: Fnc = new Fnc()
-
-	private btn: eui.Button
-	private go: egret.Bitmap
 	private stop: egret.Bitmap
 
 	private lifeArr: egret.Bitmap[] = []
 
-	private allLift: number = 3 // 总生命
-
 	private nowLift: number = 3 // 剩余生命
-
-	private setting: Setting
 
 	constructor(dispatcher, store: Store) {
 		super()
@@ -43,11 +36,6 @@ class Btn extends egret.Sprite {
 				this
 			)
 			this.dispatcher.addEventListener(
-				CustomDispatcher.OVER,
-				this.gameOver,
-				this
-			)
-			this.dispatcher.addEventListener(
 				CustomDispatcher.RESTAR,
 				this.reStar,
 				this
@@ -59,21 +47,6 @@ class Btn extends egret.Sprite {
 	}
 
 	private init(): void {
-		// this.go = this.fnc.createBitmapByName('go_png')
-		// this.go.width = 60
-		// this.go.height = 60
-		// this.go.x = egret.MainContext.instance.stage.stageWidth - this.go.width - 10
-		// this.go.y = 10
-		// this.go.visible = false
-		// this.addChild(this.go)
-		// this.go.touchEnabled = true
-		// this.go.addEventListener(
-		// 	egret.TouchEvent.TOUCH_TAP,
-		// 	() => {
-		// 		this.dispatcher.gamecontinue()
-		// 	},
-		// 	this
-		// )
 
 		this.stop = this.fnc.createBitmapByName('stop_png')
 		this.stop.width = 60
@@ -88,12 +61,10 @@ class Btn extends egret.Sprite {
 		this.stop.addEventListener(
 			egret.TouchEvent.TOUCH_TAP,
 			() => {
-				// this.setting.visible = true
 				this.dispatcher.gameStop()
 			},
 			this
 		)
-		// this.setting.startBtn.visible = false
 	}
 
 	private initLift(): void {
@@ -118,17 +89,13 @@ class Btn extends egret.Sprite {
 
 	private stopGame(): void {
 		// 暂停游戏
-		//  console.log('laile',this.stop,this.go)
 		this.stop.visible = false
-		// this.go.visible = true
-		// this.dispatcher.gameStop()
 		this.store.stop()
 	}
 
 	private continueGame(): void {
 		// 继续游戏
 		this.stop.visible = true
-		// this.go.visible = false
 		this.store.start()
 		this.dispatcher.startGame()
 	}
@@ -146,12 +113,8 @@ class Btn extends egret.Sprite {
 		)
 	}
 
-	private gameOver() {}
-
 	private reStar() {
 		this.nowLift = 3
 		this.lifeArr.forEach(item => (item.visible = true))
-
-		// this.initLift()
 	}
 }
