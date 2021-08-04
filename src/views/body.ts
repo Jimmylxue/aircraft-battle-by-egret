@@ -11,6 +11,15 @@ class Body extends egret.Sprite {
 	private speed_enemy = 10 // 飞机飞行的速度
 	private speed_launch: number = 15 // 子弹的射速
 
+	private prop:egret.Bitmap
+
+	private prop_x:number = 5
+	private prop_y:number = 5
+
+	private propsTimer:egret.Timer = new egret.Timer(10000)
+
+	private score_lable:egret.TextField = new egret.TextField()
+
 	constructor(dispatcher: CustomDispatcher, store: Store) {
 		super()
 		this.dispatcher = dispatcher
@@ -43,7 +52,22 @@ class Body extends egret.Sprite {
 			)
 		}
 		this.boomMusic = RES.getRes("boom_mp3");
+		this.addChild(this.score_lable)
+		this.score_lable.text = `当前分数：${this.store.getScore()}`
+		this.score_lable.x = 15
+		this.score_lable.y = 60
+		this.score_lable.size = 20
+		this.score_lable.visible = false
+
+		this.prop = this.fnc.createBitmapByName('blast_png')
+		this.prop.width = 80
+		this.prop.height = 80
+		this.prop.x = Math.floor(Math.random()*(egret.MainContext.instance.stage.stageWidth-this.prop.width))
+		this.prop.y = Math.floor(Math.random()*(egret.MainContext.instance.stage.stageHeight-this.prop.height))
+		
 		this.initHero()
+
+		this.initProp()
 	}
 
 	private initHero() {
@@ -60,20 +84,33 @@ class Body extends egret.Sprite {
 		this.hero.anchorOffsetY = this.hero.height / 2
 		this.hero.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.moveHero, this)
 		this.store.hero = this.hero
-		let bullet = new Bullet(this.store, this.hero)
+		let bullet = new Bullet(this.dispatcher,this.store, this.hero)
 		this.addChild(bullet)
 	}
+
 
 	private moveHero(e): void {
 		if (this.store.status === Store.STOP) {
 			return
 		}
-		// 移动飞机
 		this.hero.x = e.stageX
 		this.hero.y = e.stageY
 	}
 
+	private initProp(){
+		this.propsTimer.addEventListener(egret.TimerEvent.TIMER,()=>{
+			if(this.$children.indexOf(this.prop)===-1){
+				this.prop.x = Math.floor(Math.random()*(egret.MainContext.instance.stage.stageWidth-this.prop.width))
+				this.prop.y = Math.floor(Math.random()*(egret.MainContext.instance.stage.stageHeight-this.prop.height))
+				this.addChild(this.prop)
+			}
+		},this)
+	}
+
 	private startGame(): void {
+		this.score_lable.visible = true
+		this.addChild(this.prop)
+		this.propsTimer.start()
 		egret.Tween.get(this.hero).to(
 			{ y: egret.MainContext.instance.stage.stageHeight - 200 },
 			200
@@ -81,9 +118,40 @@ class Body extends egret.Sprite {
 		this.addEventListener(egret.Event.ENTER_FRAME,this.checkCollision,this)
 		this.store.timer_launch.start()
 		this.store.timer_enemy.start()
+		
 	}
 
 	private checkCollision(){
+		this.prop.x+=this.prop_x
+		this.prop.y+=this.prop_y
+		if(this.prop.x >= egret.MainContext.instance.stage.stageWidth-this.prop.width||this.prop.x<=0){
+			this.prop_x = this.prop_x*-1
+		}
+		if(this.prop.y >= egret.MainContext.instance.stage.stageHeight-this.prop.height||this.prop.y<=0){
+			this.prop_y*=-1
+		}
+		let rect1:egret.Rectangle = this.prop.getBounds()
+		let rect2:egret.Rectangle = this.store.hero.getBounds()
+		rect1.x = this.prop.x
+		rect1.y = this.prop.y
+		rect2.x = this.store.hero.x-this.store.hero.width/2
+		rect2.y = this.store.hero.y
+		if(rect1.intersects(rect2)){
+			if(this.$children.indexOf(this.prop)!==-1){
+				this.removeChild(this.prop)
+				this.propsTimer.reset()
+				this.propsTimer.start()
+				this.store.timer_launch.stop()
+				this.store.timer_launch = new egret.Timer(300)
+				this.dispatcher.gainProp()
+				setTimeout(() => {
+					this.store.timer_launch.stop()
+					this.store.timer_launch = new egret.Timer(800)
+					this.dispatcher.gainProp()
+				}, 5000);
+			}
+		}
+
 		this.store.enemyList.forEach(enemy=>{
 			enemy.y+=this.speed_enemy
 			let rect1:egret.Rectangle = enemy.getBounds()
@@ -127,6 +195,7 @@ class Body extends egret.Sprite {
 						// 子弹打中就可以停了
 						console.log('打中了')
 						this.store.addScore()
+						this.score_lable.text = `当前分数：${this.store.getScore()}`
 						this.fnc.blast(enemy, this)
 						// 优化点
 						let channel = this.boomMusic.play(0, 1)
@@ -159,6 +228,7 @@ class Body extends egret.Sprite {
 		this.removeEventListener(egret.Event.ENTER_FRAME,this.checkCollision,this)
 		this.store.timer_enemy.stop()
 		this.store.timer_launch.stop()
+		this.propsTimer.stop()
 
 	}
 
@@ -187,10 +257,12 @@ class Body extends egret.Sprite {
 		this.store.clearScore() // 清空得分数据
 		this.store.timer_launch.stop()
 		this.store.timer_enemy.stop()
+		this.propsTimer.stop()
 	}
 
 	private restar(): void {
 		console.log('重新开始 -- 创建战机')
+		this.score_lable.text = `当前分数：${this.store.getScore()}`
 		this.hero.x = egret.MainContext.instance.stage.stageWidth / 2
 		this.hero.y =
 			egret.MainContext.instance.stage.stageHeight + this.hero.height / 2
@@ -198,5 +270,6 @@ class Body extends egret.Sprite {
 		this.startGame()
 		this.store.timer_enemy.start()
 		this.store.timer_launch.start()
+		this.propsTimer.start()
 	}
 }

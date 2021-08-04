@@ -9,7 +9,7 @@ class Store {
 	static STOP: string = 'stop'
 	static OVER: string = 'over'
 
-	public timer_launch:egret.Timer = new egret.Timer(500)
+	public timer_launch:egret.Timer = new egret.Timer(800) // 吃道具加攻速只需要将这个定时器暂停，再赋值一个新的定时器，重新绑定监听事件即可
 	public timer_enemy:egret.Timer = new egret.Timer(1000)
 
 	public enemyList:egret.Bitmap[] = []

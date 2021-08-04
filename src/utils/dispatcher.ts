@@ -6,6 +6,7 @@ class CustomDispatcher extends egret.EventDispatcher {
   public static CONTINUE: string = "continue";
   public static BLOOD: string = "blood"; // 流血
   public static RESTAR: string = "restar"; // 流血
+  public static PROP: string = "prop"; // 流血
 
   constructor() {
     super()
@@ -33,5 +34,9 @@ class CustomDispatcher extends egret.EventDispatcher {
 
   public restar(): void {
     this.dispatchEventWith(CustomDispatcher.RESTAR);
+  }
+
+  public gainProp():void{
+    this.dispatchEventWith(CustomDispatcher.PROP);
   }
 }

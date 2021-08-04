@@ -121,6 +121,7 @@ class Main extends eui.UILayer {
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
 		this.store.setBgm(sound)
+		this.store.toggleBgm(1)
 		let bg = new Bg(this.dispatcher)
 		this.addChild(bg)
 
@@ -158,7 +159,9 @@ class Main extends eui.UILayer {
 		setTimeout(() => {
 			egret.Tween.removeAllTweens()
 			this.dispatcher.startGame()
-			this.removeChild(this.star)
+			if(this.$children.indexOf(this.star) !== -1){
+				this.removeChild(this.star)
+			}
 		}, 1200)
 	}
 

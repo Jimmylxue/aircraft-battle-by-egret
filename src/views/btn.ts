@@ -83,7 +83,7 @@ class Btn extends egret.Sprite {
 
 	private startGame(): void {
 		this.stop.visible = true
-		this.lifeArr.forEach(lift => (lift.visible = true))
+		this.lifeArr.forEach((lift,index) => index<this.nowLift?lift.visible = true:'')
 		this.store.start()
 	}
 
