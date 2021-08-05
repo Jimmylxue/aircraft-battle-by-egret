@@ -73,6 +73,24 @@ class Store {
 		this.bulletList.splice(this.bulletList.indexOf(bullet), 1)
 	}
 
+	public removeChildEnemy(){
+		this.enemyList.forEach(enemy=>{
+			if(this.that.$children.indexOf(enemy)!=-1){
+				this.that.removeChild(enemy)
+			}
+		})
+		this.enemyList = []
+	}
+
+	public removeChildBullet(){
+		this.bulletList.forEach(bullet=>{
+			if(this.that_bullet.$children.indexOf(bullet)!=-1){
+				this.that_bullet.removeChild(bullet)
+			}
+		})
+		this.bulletList = []
+	}
+
 	public getScore(): number {
 		return this.score
 	}

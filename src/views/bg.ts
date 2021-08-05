@@ -14,6 +14,9 @@ class Bg extends egret.Sprite {
     if (dispatcher) {
       this.dispatcher.addEventListener(CustomDispatcher.START, this.startGame, this)
       this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
+      this.dispatcher.addEventListener(CustomDispatcher.CONTINUE, ()=>{
+        this.addEventListener(egret.Event.ENTER_FRAME,this.moveBg,this)
+      }, this)
     }
     this.initBg()
   }

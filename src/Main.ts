@@ -114,14 +114,10 @@ class Main extends eui.UILayer {
 	 * Create scene interface
 	 */
 	protected createGameScene(): void {
-
-        // egret.Event.ENTER_FRAME(()=>{},this)
-
-		this.dispatcher.addEventListener(CustomDispatcher.OVER, this.gameOver, this)
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
 		this.store.setBgm(sound)
-		this.store.toggleBgm(1)
+		// this.store.toggleBgm(1)
 		let bg = new Bg(this.dispatcher)
 		this.addChild(bg)
 
@@ -178,6 +174,7 @@ class Main extends eui.UILayer {
 		this.setting.close_btn.addEventListener(
 			egret.TouchEvent.TOUCH_TAP,
 			() => {
+				console.log(1111)
 				this.dispatcher.gamecontinue()
 				this.removeChild(this.setting)
 			},
@@ -186,6 +183,8 @@ class Main extends eui.UILayer {
 		this.setting.startBtn.addEventListener(
 			egret.TouchEvent.TOUCH_TAP,
 			() => {
+				console.log(222)
+
 				this.dispatcher.gamecontinue()
 				this.removeChild(this.setting)
 			},
@@ -215,38 +214,8 @@ class Main extends eui.UILayer {
 
 	public show(){}
 
-	private gameOver(): void {
-		this.myPannel = new eui.Panel()
-		this.myPannel.zIndex = 99
-		this.myPannel.title = '游戏结束'
-		let endText = new egret.TextField()
-		endText.text = `游戏结束\n您的成绩是${this.store.getScore()}`
-		this.myPannel.addChild(endText)
-		this.myPannel.minWidth = 450
-		endText.anchorOffsetX = endText.width / 2
-		endText.anchorOffsetY = endText.height / 2
-		endText.x = this.myPannel.width / 2 + 10
-		endText.y = this.myPannel.height / 2 + 110
-		endText.size = 25
-		endText.textColor = 0x000000
-		endText.textAlign = 'center'
-		this.myPannel.y = egret.MainContext.instance.stage.stageHeight / 2 - 150
-		this.myPannel.x =
-			egret.MainContext.instance.stage.stageWidth / 2 - this.myPannel.width / 2
-		this.addChild(this.myPannel)
-		this.myPannel.closeButton.label = '重新开始'
-		this.myPannel.closeButton.addEventListener(
-			egret.TouchEvent.TOUCH_TAP,
-			this.onButtonClick,
-			this
-		)
-	}
-
 	/**
 	 * 点击按钮
 	 * Click the button
 	 */
-	private onButtonClick(e: egret.TouchEvent) {
-		this.dispatcher.restar()
-	}
 }

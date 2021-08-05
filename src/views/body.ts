@@ -108,6 +108,7 @@ class Body extends egret.Sprite {
 	}
 
 	private startGame(): void {
+		console.log('kkkkkk')
 		this.score_lable.visible = true
 		this.addChild(this.prop)
 		this.propsTimer.start()
@@ -116,6 +117,11 @@ class Body extends egret.Sprite {
 			200
 		)
 		this.addEventListener(egret.Event.ENTER_FRAME,this.checkCollision,this)
+		/*
+			防止 吃完道具之后在道具持续时间内死完立即复活还有道具状态
+		*/ 
+		this.store.timer_launch = new egret.Timer(800)
+		this.dispatcher.gainProp()
 		this.store.timer_launch.start()
 		this.store.timer_enemy.start()
 		
@@ -135,7 +141,7 @@ class Body extends egret.Sprite {
 		rect1.x = this.prop.x
 		rect1.y = this.prop.y
 		rect2.x = this.store.hero.x-this.store.hero.width/2
-		rect2.y = this.store.hero.y
+		rect2.y = this.store.hero.y-this.store.hero.height/2
 		if(rect1.intersects(rect2)){
 			if(this.$children.indexOf(this.prop)!==-1){
 				this.removeChild(this.prop)
@@ -235,6 +241,9 @@ class Body extends egret.Sprite {
 	private continueGame(): void {
 		console.log('游戏继续了')
 		this.addEventListener(egret.Event.ENTER_FRAME,this.checkCollision,this)
+		this.store.timer_enemy.start()
+		this.store.timer_launch.start()
+		this.propsTimer.start()
 	}
 
 	private gameOver(): void {
@@ -242,22 +251,39 @@ class Body extends egret.Sprite {
 		this.removeEventListener(egret.Event.ENTER_FRAME,this.checkCollision,this)
 		this.fnc.blast(this.hero, this, 'hero')
 		this.removeChild(this.hero)
-		this.store.enemyList.forEach(enemy=>{
-			if(this.store.that.$children.indexOf(enemy)!=-1){
-				this.store.that.removeChild(enemy)
-			}
-		})
-		this.store.enemyList = []
-		this.store.bulletList.forEach(bullet=>{
-			if(this.store.that_bullet.$children.indexOf(bullet)!=-1){
-				this.store.that_bullet.removeChild(bullet)
-			}
-		})
-		this.store.bulletList = []
+		this.store.removeChildEnemy()
+		this.store.removeChildBullet()
 		this.store.clearScore() // 清空得分数据
 		this.store.timer_launch.stop()
 		this.store.timer_enemy.stop()
 		this.propsTimer.stop()
+
+		let pannel = new eui.Panel()
+		pannel.zIndex = 99
+		pannel.title = '游戏结束'
+		let endText = new egret.TextField()
+		endText.text = `游戏结束\n您的成绩是${this.store.getScore()}`
+		pannel.addChild(endText)
+		pannel.minWidth = 450
+		endText.anchorOffsetX = endText.width / 2
+		endText.anchorOffsetY = endText.height / 2
+		endText.x = pannel.width / 2 + 10
+		endText.y = pannel.height / 2 + 110
+		endText.size = 25
+		endText.textColor = 0x000000
+		endText.textAlign = 'center'
+		pannel.y = egret.MainContext.instance.stage.stageHeight / 2 - 150
+		pannel.x =
+			egret.MainContext.instance.stage.stageWidth / 2 - pannel.width / 2
+		this.addChild(pannel)
+		pannel.closeButton.label = '重新开始'
+		pannel.closeButton.addEventListener(
+			egret.TouchEvent.TOUCH_TAP,
+			()=>{
+				this.dispatcher.restar()
+			},	
+			this
+		)
 	}
 
 	private restar(): void {

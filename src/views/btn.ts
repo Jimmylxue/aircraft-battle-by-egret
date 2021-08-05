@@ -96,8 +96,9 @@ class Btn extends egret.Sprite {
 	private continueGame(): void {
 		// 继续游戏
 		this.stop.visible = true
-		this.store.start()
-		this.dispatcher.startGame()
+		this.startGame()
+		// this.store.start()
+		// this.dispatcher.startGame()
 	}
 
 	private buckleBlood(): void {
