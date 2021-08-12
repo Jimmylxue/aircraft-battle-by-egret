@@ -28,13 +28,10 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends eui.UILayer {
-	private fnc = new Fnc()
 
 	private dispatcher: CustomDispatcher = new CustomDispatcher()
 
 	private store: Store = new Store()
-
-	private myPannel: eui.Panel
 
 	private star: Star // 开始前的自定义界面
 
@@ -117,7 +114,7 @@ class Main extends eui.UILayer {
 		this.dispatcher.addEventListener(CustomDispatcher.STOP, this.stopGame, this)
 		let sound: egret.Sound = RES.getRes('bgm_mp3')
 		this.store.setBgm(sound)
-		// this.store.toggleBgm(1)
+		this.store.toggleBgm(1)
 		let bg = new Bg(this.dispatcher)
 		this.addChild(bg)
 
@@ -170,7 +167,15 @@ class Main extends eui.UILayer {
 		this.setting.y =
 			egret.MainContext.instance.stage.stageHeight / 2 - this.setting.height / 2
 		this.addChild(this.setting)
-		this.setting.music_open.visible = false
+		if(this.store.bgmStatus){
+			// 在播放
+			this.setting.music_open.visible = false
+			this.setting.music_close.visible = true
+		}else{
+			// 未播放
+			this.setting.music_open.visible = true
+			this.setting.music_close.visible = false
+		}
 		this.setting.close_btn.addEventListener(
 			egret.TouchEvent.TOUCH_TAP,
 			() => {
@@ -184,7 +189,6 @@ class Main extends eui.UILayer {
 			egret.TouchEvent.TOUCH_TAP,
 			() => {
 				console.log(222)
-
 				this.dispatcher.gamecontinue()
 				this.removeChild(this.setting)
 			},
@@ -211,11 +215,4 @@ class Main extends eui.UILayer {
 			this
 		)
 	}
-
-	public show(){}
-
-	/**
-	 * 点击按钮
-	 * Click the button
-	 */
 }

@@ -6,6 +6,8 @@ class Body extends egret.Sprite {
 
 	private hero: egret.Bitmap
 
+	private timer = null
+
 	private boomMusic = null
 
 	private speed_enemy = 10 // 飞机飞行的速度
@@ -150,7 +152,13 @@ class Body extends egret.Sprite {
 				this.store.timer_launch.stop()
 				this.store.timer_launch = new egret.Timer(300)
 				this.dispatcher.gainProp()
-				setTimeout(() => {
+				/**
+				 * 这里在浏览器中会存在一个bug，当主机死亡时如果用户点了浏览器页面显示区域其他内容，页面会暂停
+				 * 但是计时器还在继续的触发， 这个就是造成会偶尔有多连发的原因
+				 * 出于优化这里 只能是把这个变量存下来 然后在游戏结束的时候直接不触发清除掉这个定时器即可
+				 *  */ 
+				
+				this.timer = setTimeout(() => {
 					this.store.timer_launch.stop()
 					this.store.timer_launch = new egret.Timer(800)
 					this.dispatcher.gainProp()
@@ -253,10 +261,14 @@ class Body extends egret.Sprite {
 		this.removeChild(this.hero)
 		this.store.removeChildEnemy()
 		this.store.removeChildBullet()
-		this.store.clearScore() // 清空得分数据
 		this.store.timer_launch.stop()
+		// 游戏结束的时候直接不触发清除掉这个定时器即可
+		clearTimeout(this.timer)
 		this.store.timer_enemy.stop()
 		this.propsTimer.stop()
+		if(this.$children.indexOf(this.prop)!==-1){
+			this.removeChild(this.prop)
+		}
 
 		let pannel = new eui.Panel()
 		pannel.zIndex = 99
@@ -288,6 +300,7 @@ class Body extends egret.Sprite {
 
 	private restar(): void {
 		console.log('重新开始 -- 创建战机')
+		this.store.clearScore() // 清空得分数据
 		this.score_lable.text = `当前分数：${this.store.getScore()}`
 		this.hero.x = egret.MainContext.instance.stage.stageWidth / 2
 		this.hero.y =

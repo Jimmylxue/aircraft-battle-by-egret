@@ -9,6 +9,8 @@ class Store {
 	static STOP: string = 'stop'
 	static OVER: string = 'over'
 
+	public bgmStatus:boolean // 背景音乐播放的状态
+
 	public timer_launch:egret.Timer = new egret.Timer(800) // 吃道具加攻速只需要将这个定时器暂停，再赋值一个新的定时器，重新绑定监听事件即可
 	public timer_enemy:egret.Timer = new egret.Timer(1000)
 
@@ -109,9 +111,11 @@ class Store {
 
 	public toggleBgm(flag: number) {
 		if (flag === 1) {
+			this.bgmStatus = true
 			this.channel = this.bgm.play()
 			return
 		} else if (flag === 0) {
+			this.bgmStatus = false
 			this.channel.stop()
 		}
 	}

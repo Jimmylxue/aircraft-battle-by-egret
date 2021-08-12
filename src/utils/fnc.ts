@@ -33,6 +33,14 @@ class Fnc {
 			},
 			this
 		)
+		// // let timer =	setInterval(()=>{
+		// // 	startIndex++
+		// // 	img.texture = RES.getRes(`explosion${startIndex}_png`)
+		// // 	if (startIndex === 9) {
+		// // 		clearInterval(timer)
+		// // 		that.removeChild(img)
+		// // 	}
+		// // },18)
 		that.addChild(img)
 		imgTimer.start()
 	}
